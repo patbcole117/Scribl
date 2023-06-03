@@ -26,7 +26,7 @@ def encode_msg(file, msg)
         return encoded_msg
                                        
 def decode_msg(file)
-                                       
+      pass                                 
                                        
 def check(file):                                                              
     with open(file, mode='rb') as file:                                       
