@@ -1,9 +1,16 @@
 import sys
 
-def encode_msg(otp, msg):
-    pass
+def encode_msg(otp_map, msg):
+    otp = generate_otp(otp_map, msg)
+    encoded_msg = bytearray()
 
-def decode_msg(otp, msg):
+    for i in range(len(msg)):
+        encoded_msg.append(msg[i] ^ otp[i])
+    
+    return encoded_msg
+
+
+def decode_msg(otp_map, msg):
     pass
 
 def write_to_file(file, msg):
