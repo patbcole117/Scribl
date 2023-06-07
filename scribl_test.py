@@ -24,13 +24,13 @@ def check_end_of_file():
 class write_to_file_test(unittest.TestCase):
     
     def test_write_to_file(self):
-        print(' BEGIN TEST WRITE_TO_FILE')
+        print('\nBEGIN TEST WRITE_TO_FILE')
     
         check_end_of_file()
         scribl.write_to_file(TEST_FILE, 'This is a test')
         check_end_of_file()
     
-        print(' BEGIN TEST WRITE_TO_FILE')
+        print('\nEND TEST WRITE_TO_FILE')
 
 
 class encode_msg_test(unittest.TestCase):
