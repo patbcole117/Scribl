@@ -11,10 +11,20 @@ def encode_msg(otp_map, msg):
 
 
 def decode_msg(otp_map, msg):
-    pass
+    otp = generate_otp(otp_map, msg)
+    decoded_msg = bytearray()
+
+    for i in range(len(msg)):
+        decoded_msg.append(msg[i] ^ otp[i])
+    
+    return decoded_msg
+
 
 def write_to_file(file, msg):
-    pass
+    with open(file, mode='rb') as f:
+        otp_map = f.read()
+    with open(file, mode='ab') as f:
+        f.write(encode_msg(otp_map, msg.encode('utf-8')))
 
 def read_from_file(file):
     pass
