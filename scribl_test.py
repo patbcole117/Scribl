@@ -20,6 +20,10 @@ def check_end_of_file():
     print(f.read())
     f.close()
 
+class read_from_file_test(unittest.TestCase):
+    
+    def test_read_from_file(self):
+        pass
 
 class write_to_file_test(unittest.TestCase):
     

@@ -25,6 +25,7 @@ def write_to_file(file, msg):
         otp_map = f.read()
     with open(file, mode='ab') as f:
         f.write(encode_msg(otp_map, msg.encode('utf-8')))
+        f.write(len(msg).to_bytes(4))
 
 def read_from_file(file):
     pass
