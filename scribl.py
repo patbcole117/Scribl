@@ -1,5 +1,7 @@
 import sys
 
+MSG_SIZE_MAX_BYTES = 4
+
 def encode_msg(otp_map, msg):
     otp = generate_otp(otp_map, msg)
     encoded_msg = bytearray()
@@ -25,9 +27,21 @@ def write_to_file(file, msg):
         otp_map = f.read()
     with open(file, mode='ab') as f:
         f.write(encode_msg(otp_map, msg.encode('utf-8')))
+        f.write(len(msg).to_bytes(MSG_SIZE_MAX_BYTES, 'big'))
 
 def read_from_file(file):
-    pass
+    with open(file, mode='rb') as f:
+        f.seek(-MSG_SIZE_MAX_BYTES, 2)
+        msg_size = int.from_bytes(f.read(), 'big')
+        msg_start = -(msg_size + 4)
+        f.seek(msg_start, 2)
+        encoded_msg = f.read()[:-MSG_SIZE_MAX_BYTES]
+        
+        f.seek(0)
+        decoded_msg =decode_msg(f.read(), encoded_msg)
+
+    return decoded_msg
+
 
 def remove_from_file(file):
     pass

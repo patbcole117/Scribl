@@ -11,6 +11,8 @@ tests =[(b'pat', b'\x00\x00\x00',b'\x70\x61\x74'), \
         (b'patrick', b'\x01', b'\x71\x60\x75\x73\x68\x62\x6A'), \
         (b'patrick', b'\x00\x01\x02\x03\x04', b'\x70\x60\x76\x71\x6D\x63\x6A')]
 
+tests2 = ['This is a secret message.', 'Hello World!', 'echo \'Hello World!\'']
+
 TEST_FILE = 'img/snowman.png'
 
 
@@ -21,16 +23,29 @@ def check_end_of_file():
     f.close()
 
 
+class read_from_file_test(unittest.TestCase):
+    
+    def test_read_from_file(self):
+        
+        print('\nBEGIN TEST READ_FROM_FILE')
+        for t in tests2:
+            scribl.write_to_file(TEST_FILE, t)
+            msg = scribl.read_from_file(TEST_FILE).decode()
+            self.assertEqual(msg, t)
+            print(f'written: {t} decoded: {msg}')
+
+        print('END TEST READ_FROM_FILE')
+
 class write_to_file_test(unittest.TestCase):
     
     def test_write_to_file(self):
-        print(' BEGIN TEST WRITE_TO_FILE')
+        print('\nBEGIN TEST WRITE_TO_FILE')
     
         check_end_of_file()
         scribl.write_to_file(TEST_FILE, 'This is a test')
         check_end_of_file()
     
-        print(' BEGIN TEST WRITE_TO_FILE')
+        print('END TEST WRITE_TO_FILE')
 
 
 class encode_msg_test(unittest.TestCase):
